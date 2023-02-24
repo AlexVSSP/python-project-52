@@ -4,3 +4,5 @@ __pycache__
 .venv
 dist
 db.sqlite3
+.coverage
+coverage.xml
