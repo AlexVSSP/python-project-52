@@ -15,6 +15,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
+# flake8: noqa: C901
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
@@ -30,7 +31,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['webserver', '127.0.0.1', '0.0.0.0', '.railway.app']
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['webserver', '127.0.0.1', '0.0.0.0', '.railway.app']
 
 
 # Application definition
