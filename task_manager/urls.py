@@ -15,9 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from task_manager import views
+from task_manager.views import index, IndexView, UserFormCreateView, \
+    UserLoginView, UserUpdateView, UserDestroyView, UserLogoutView
 
 urlpatterns = [
-    path('', views.index),
+    path('', index, name='home'),
     path('admin/', admin.site.urls),
+    path('users/create/', UserFormCreateView.as_view(),
+         name='user_create'),
+    path('users/<int:pk>/update/', UserUpdateView.as_view(),
+         name='user_update'),
+    path('users/<int:pk>/delete/', UserDestroyView.as_view(),
+         name='user_delete'),
+    path('users/', IndexView.as_view(), name='users_list'),
+    path('login/', UserLoginView.as_view(), name='user_login'),
+    path('logout/', UserLogoutView.as_view(), name='user_logout'),
 ]
