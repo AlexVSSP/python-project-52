@@ -45,7 +45,8 @@ class UserLogoutView(SuccessMessageMixin, LogoutView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin,
+                     SuccessMessageMixin, UpdateView):
     model = User
     form_class = UserForm
     template_name = 'update.html'
@@ -61,7 +62,8 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
             url = reverse_lazy('users_list')
-            message = 'У вас недостаточно прав, что редактировать другого пользователя'
+            message = 'У вас недостаточно прав, ' \
+                      'чтобы редактировать другого пользователя'
         else:
             url = self.login_url
             message = 'Вы не авторизованы! Пожалуйста, выполните вход.'
@@ -78,14 +80,14 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixi
         return redirect(self.success_url)
 
 
-class UserDestroyView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+class UserDestroyView(LoginRequiredMixin, UserPassesTestMixin,
+                      SuccessMessageMixin, DeleteView):
     model = User
     template_name = 'delete.html'
     success_url = reverse_lazy('users_list')
     success_message = 'Пользователь успешно удален'
     extra_context = {'button_name': 'Да, удалить'}
     login_url = reverse_lazy('user_login')
-
 
     def test_func(self):
         user = self.get_object()
@@ -94,7 +96,8 @@ class UserDestroyView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMix
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
             url = reverse_lazy('users_list')
-            message = 'У вас недостаточно прав, что редактировать другого пользователя'
+            message = 'У вас недостаточно прав, ' \
+                      'чтобы редактировать другого пользователя'
         else:
             url = self.login_url
             message = 'Вы не авторизованы! Пожалуйста, выполните вход.'
