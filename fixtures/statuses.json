@@ -1,0 +1,26 @@
+[
+{
+    "model": "statuses.status",
+    "pk": 8,
+    "fields": {
+        "name": "На тестировании",
+        "created_at": "2023-03-22T16:37:09.053Z"
+    }
+},
+{
+    "model": "statuses.status",
+    "pk": 9,
+    "fields": {
+        "name": "В работе",
+        "created_at": "2023-03-22T16:37:43.757Z"
+    }
+},
+{
+    "model": "statuses.status",
+    "pk": 10,
+    "fields": {
+        "name": "Здесь могла быть ваша реклама",
+        "created_at": "2023-03-22T16:38:15.834Z"
+    }
+}
+]

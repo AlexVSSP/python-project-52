@@ -1,0 +1,26 @@
+[
+{
+    "model": "labels.label",
+    "pk": 2,
+    "fields": {
+        "name": "Пупер",
+        "created_at": "2023-03-27T17:57:22.374Z"
+    }
+},
+{
+    "model": "labels.label",
+    "pk": 3,
+    "fields": {
+        "name": "Не забыть",
+        "created_at": "2023-03-27T17:57:29.754Z"
+    }
+},
+{
+    "model": "labels.label",
+    "pk": 4,
+    "fields": {
+        "name": "Супер",
+        "created_at": "2023-03-27T17:58:07.311Z"
+    }
+}
+]
