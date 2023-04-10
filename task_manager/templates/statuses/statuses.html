@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block header %}
+
+  {% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %} alert-success
+                    {%elif message.tags == 'warning'%} alert-danger {%endif%}
+                    container col-4" role="alert">
+        {{ message }}
+        </div>
+    {% endfor %}
+  {% endif %}
+
+  <h1 class="my-4 mb-3 text-center">{% trans "Statuses" %}</h1>
+{% endblock %}
+
+{% block content %}
+  <a href="{% url 'status_create' %}" class="nav-link text-center">{% trans "Create" %}</a>
+  <table class="table table-striped container col-6">
+    <tr>
+      <th>ID</th>
+      <th>{% trans "Name" %}</th>
+      <th>{% trans "Created at" %}</th>
+      <th></th>
+    </tr>
+  <tbody>
+    {% for status in statuses %}
+      <tr>
+        <td> {{ status.id }} </td>
+        <td> {{ status.name }} </td>
+        <td> {{ status.created_at }} </td>
+        <td>
+          <a href="{% url 'status_update' pk=status.pk %}">{% trans "Edit" %}</a>
+          <br>
+          <a href="{% url 'status_delete' pk=status.pk %}" rel="nofollow">{% trans "Delete" %}</a>
+      </tr>
+    {% endfor %}
+  <tbody>
+  </table>
+{% endblock %}
