@@ -3,12 +3,12 @@
 {% load bootstrap4 %}
 
 {% block header %}
-    <h1 class="my-4 mb-3 text-center">Удаление пользователя</h1>
+    <h1 class="my-4 mb-3 text-center">{% trans "Deleting a user" %}</h1>
 {% endblock %}
 
 {% block content %}
     <div class="container col-4 text-center">
-        <p>Вы уверены, что хотите удалить {{ user.username }}?</p>
+        <p>{% trans "Are you sure you want to delete" %} {{ user.username }}?</p>
 
     <form action="{% url 'user_delete' pk=user.pk%}" method="post">
       {% csrf_token %}

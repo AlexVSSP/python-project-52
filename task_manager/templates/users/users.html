@@ -13,16 +13,16 @@
     {% endfor %}
   {% endif %}
 
-  <h1 class="my-4 mb-3 text-center">Пользователи</h1>
+  <h1 class="my-4 mb-3 text-center">{% trans "Users" %}</h1>
 {% endblock %}
 
 {% block content %}
   <table class="table table-striped container col-6">
     <tr>
       <th>ID</th>
-      <th>Имя пользователя</th>
-      <th>Полное имя</th>
-      <th>Дата создания</th>
+      <th>{% trans "Username" %}</th>
+      <th>{% trans "Full name" %}</th>
+      <th>{% trans "Created at" %}</th>
       <th></th>
     </tr>
   <tbody>
@@ -31,11 +31,11 @@
         <td> {{ user.id }} </td>
         <td> {{ user.username }} </td>
         <td> {{ user.first_name }} {{ user.last_name }} </td>
-        <td> {{ user.created_at }} </td>
+        <td> {{ user.date_joined }} </td>
         <td>
-          <a href="{% url 'user_update' pk=user.pk %}">Редактировать</a>
+          <a href="{% url 'user_update' pk=user.pk %}">{% trans "Edit" %}</a>
           <br>
-          <a href="{% url 'user_delete' pk=user.pk %}" rel="nofollow">Удалить</a>
+          <a href="{% url 'user_delete' pk=user.pk %}" rel="nofollow">{% trans "Delete" %}</a>
       </tr>
     {% endfor %}
   <tbody>
