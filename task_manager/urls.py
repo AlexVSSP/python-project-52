@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from task_manager import views
 
 from task_manager.views import IndexView, UserLoginView, UserLogoutView
 
@@ -27,4 +28,5 @@ urlpatterns = [
     path('labels/', include('task_manager.labels.urls')),
     path('login/', UserLoginView.as_view(), name='user_login'),
     path('logout/', UserLogoutView.as_view(), name='user_logout'),
+    path('index/', views.index, name='test')
 ]
