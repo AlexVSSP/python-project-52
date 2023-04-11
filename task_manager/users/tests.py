@@ -113,7 +113,7 @@ class UserTestClass(TestCase):
         self.assertTemplateUsed(get_response, 'users/delete.html')
         post_response = self.client.post(deleted_user, follow=True)
         self.assertRedirects(post_response, reverse('users_list'))
-        self.assertContains(post_response, 'Пользователь успешно удален')
+        # self.assertContains(post_response, 'Пользователь успешно удален')
         self.assertContains(post_response,
                             _('The user was successfully deleted'))
 

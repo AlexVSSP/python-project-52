@@ -76,11 +76,11 @@ msgstr "Статус успешно создан"
 
 #: task_manager/statuses/tests.py:83 task_manager/statuses/views.py:51
 msgid "The status updated successfully"
-msgstr "Статус успешно изменен"
+msgstr "Статус успешно изменён"
 
 #: task_manager/statuses/tests.py:100 task_manager/statuses/views.py:83
 msgid "The status was successfully deleted"
-msgstr "Статус успешно удален"
+msgstr "Статус успешно удалён"
 
 #: task_manager/statuses/views.py:40 task_manager/tasks/views.py:50
 msgid "You are not logged in!, Please log in"
