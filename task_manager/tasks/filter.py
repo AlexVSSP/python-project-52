@@ -32,7 +32,7 @@ class TaskFilter(FilterSet):
         widget=forms.Select(attrs={'title_id': 'id_label'}))
 
     self_task = BooleanFilter(
-        label=_('Only my tasks'),
+        label=_('Only own tasks'),
         widget=forms.widgets.CheckboxInput(attrs={'title_id': 'id_self_task'}),
         method='task_filter')
 
