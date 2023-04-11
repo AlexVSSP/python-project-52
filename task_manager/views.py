@@ -7,7 +7,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView, LogoutView
 # from django.urls import reverse_lazy
 from django.contrib import messages
-from django.http import HttpResponse
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 
