@@ -44,12 +44,3 @@ class UserLogoutView(SuccessMessageMixin, LogoutView):
         # messages.add_message(request, messages.INFO, 'Вы разлогинены')
         messages.add_message(request, messages.INFO, _('You are logged out'))
         return super().dispatch(request, *args, **kwargs)
-
-
-def index(request):
-    """
-    Test function for checking rollbar
-    """
-    a = None
-    a.hello()  # Creating an error with an invalid line of code
-    return HttpResponse("Hello, world. You're at the pollapp index.")
