@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 23:45+0300\n"
+"POT-Creation-Date: 2023-04-12 00:04+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,7 @@ msgstr "Метка успешно удалена"
 msgid "You are not logged in! Please log in"
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход"
 
-#: task_manager/labels/views.py:42
+#: task_manager/labels/views.py:42 task_manager/templates/labels/labels.html:20
 msgid "Create label"
 msgstr "Создать метку"
 
@@ -80,6 +80,7 @@ msgid "The status was successfully deleted"
 msgstr "Статус успешно удалён"
 
 #: task_manager/statuses/views.py:40
+#: task_manager/templates/statuses/statuses.html:20
 msgid "Create status"
 msgstr "Создать статус"
 
@@ -137,7 +138,7 @@ msgstr "Задача успешно изменена"
 msgid "The task was successfully deleted"
 msgstr "Задача успешно удалена"
 
-#: task_manager/tasks/views.py:44
+#: task_manager/tasks/views.py:44 task_manager/templates/tasks/tasks.html:21
 msgid "Create task"
 msgstr "Создать задачу"
 
@@ -199,12 +200,6 @@ msgstr "Удаление метки"
 #: task_manager/templates/users/delete.html:11
 msgid "Are you sure you want to delete"
 msgstr "Вы уверены, что хотите удалить"
-
-#: task_manager/templates/labels/labels.html:20
-#: task_manager/templates/statuses/statuses.html:20
-#: task_manager/templates/tasks/tasks.html:21
-msgid "Create"
-msgstr "Создать"
 
 #: task_manager/templates/labels/labels.html:25
 #: task_manager/templates/statuses/statuses.html:25
@@ -323,3 +318,6 @@ msgstr "Войти"
 #: task_manager/views.py:45
 msgid "You are logged out"
 msgstr "Вы разлогинены"
+
+#~ msgid "Create"
+#~ msgstr "Создать"
