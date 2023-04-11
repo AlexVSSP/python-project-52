@@ -39,7 +39,7 @@ class LabelCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     # success_message = 'Метка успешно создана'
     success_message = _('The label was created successfully')
     # extra_context = {'button_name': 'Создать'}
-    extra_context = {'button_name': _('Create')}
+    extra_context = {'button_name': _('Create label')}
     login_url = reverse_lazy('user_login')
 
     def handle_no_permission(self):

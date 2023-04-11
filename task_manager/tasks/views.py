@@ -41,7 +41,7 @@ class TaskCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     # success_message = 'Задача успешно создана'
     success_message = _('The task was created successfully')
     # extra_context = {'button_name': 'Создать'}
-    extra_context = {'button_name': _('Create')}
+    extra_context = {'button_name': _('Create task')}
     login_url = reverse_lazy('user_login')
     # login_url = 'user_login'
 
