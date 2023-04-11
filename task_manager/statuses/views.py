@@ -37,7 +37,7 @@ class StatusFormCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     # success_message = 'Статус успешно создан'
     success_message = _('The status was created successfully')
     # extra_context = {'button_name': 'Создать'}
-    extra_context = {'button_name': _('Create status')}
+    extra_context = {'button_name': _('Create')}
     login_url = reverse_lazy('user_login')
 
     def handle_no_permission(self):
