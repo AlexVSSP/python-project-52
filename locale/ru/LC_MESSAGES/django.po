@@ -282,7 +282,7 @@ msgstr "Пользователь успешно зарегистрирован"
 #: task_manager/users/tests.py:87 task_manager/users/views.py:38
 #: task_manager/users/views.py:68
 msgid "The user has been successfully updated"
-msgstr "Пользователь успешно изменен"
+msgstr "Пользователь успешно изменён"
 
 #: task_manager/users/tests.py:103 task_manager/users/tests.py:129
 #: task_manager/users/views.py:52 task_manager/users/views.py:91
@@ -291,7 +291,7 @@ msgstr "У вас недостаточно прав, чтобы редактир
 
 #: task_manager/users/tests.py:115 task_manager/users/views.py:104
 msgid "The user was successfully deleted"
-msgstr "Пользователь успешно удален"
+msgstr "Пользователь успешно удалён"
 
 #: task_manager/users/views.py:28
 msgid "Register"
