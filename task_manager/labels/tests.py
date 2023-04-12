@@ -25,7 +25,8 @@ class LabelTestWithoutAuth(TestCase):
 
 
 class LabelTestClass(TestCase):
-    fixtures = ['users.json', 'statuses.json', 'tasks.json', 'labels.json']
+    fixtures = ['users.json', 'statuses.json',
+                'tasks.json', 'labels.json']
 
     def setUp(self):
         self.user = User.objects.get(pk=2)
@@ -57,7 +58,6 @@ class LabelTestClass(TestCase):
         self.assertRedirects(post_response, self.labels)
         new_label = Label.objects.get(name=self.form_data['name'])
         self.assertEqual(new_label.id, 5)
-        # self.assertContains(post_response, 'Метка успешно создана')
         self.assertContains(post_response,
                             _('The label was created successfully'))
 
@@ -77,24 +77,25 @@ class LabelTestClass(TestCase):
         self.assertRedirects(post_response, self.labels)
         updated_label = Label.objects.get(pk=2)
         self.assertEqual(updated_label.name, 'new label')
-        # self.assertContains(post_response, 'Метка успешно изменена')
-        self.assertContains(post_response, _('The label updated successfully'))
+        self.assertContains(post_response,
+                            _('The label updated successfully'))
 
     def test_not_used_label_delete(self):
         self.label_delete = reverse('label_delete', kwargs={'pk': 3})
         """
         GET
         """
-        get_response = self.client.get(self.label_delete, follow=True)
+        get_response = self.client.get(self.label_delete,
+                                       follow=True)
         self.assertEqual(get_response.status_code, 200)
         """
         POST
         """
-        post_response = self.client.post(self.label_delete, follow=True)
+        post_response = self.client.post(self.label_delete,
+                                         follow=True)
         self.assertRedirects(post_response, self.labels)
         with self.assertRaises(ObjectDoesNotExist):
             Label.objects.get(pk=3)
-        # self.assertContains(post_response, 'Метка успешно удалена')
         self.assertContains(post_response,
                             _('The label was successfully deleted'))
 
@@ -103,11 +104,13 @@ class LabelTestClass(TestCase):
         """
         GET
         """
-        get_response = self.client.get(self.label_delete, follow=True)
+        get_response = self.client.get(self.label_delete,
+                                       follow=True)
         self.assertEqual(get_response.status_code, 200)
         """
         POST
         """
-        post_response = self.client.post(self.label_delete, follow=True)
+        post_response = self.client.post(self.label_delete,
+                                         follow=True)
         self.assertRedirects(post_response, self.labels)
         self.assertEqual(len(Label.objects.all()), 3)

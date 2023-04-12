@@ -48,7 +48,8 @@ class IndexViewTest(TestCase):
 
 
 class UserTestClass(TestCase):
-    fixtures = ['users.json', 'statuses.json', 'tasks.json', 'labels.json']
+    fixtures = ['users.json', 'statuses.json',
+                'tasks.json', 'labels.json']
 
     def setUp(self):
         self.user1 = User.objects.get(pk=1)
@@ -66,41 +67,41 @@ class UserTestClass(TestCase):
         response = self.client.get(reverse('user_create'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/create.html')
-        request = self.client.post(reverse('user_create'), self.form_data,
+        request = self.client.post(reverse('user_create'),
+                                   self.form_data,
                                    follow=True)
         self.assertRedirects(request, reverse('user_login'))
-        # self.assertContains(request, 'Пользователь успешно зарегистрирован')
         self.assertContains(request,
                             _('The user has been successfully registered'))
         self.assertTrue(User.objects.get(pk=4))
 
     def test_user_update_success(self):
         self.client.force_login(self.user3)
-        response = self.client.get(reverse('user_update', kwargs={"pk": 3}))
+        response = self.client.get(reverse('user_update',
+                                           kwargs={"pk": 3}))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/update.html')
         request = self.client.post(reverse('user_update', kwargs={"pk": 3}),
-                                   self.form_data, follow=True)
+                                   self.form_data,
+                                   follow=True)
         self.assertRedirects(request, reverse('users_list'))
         updated_user = User.objects.get(pk=3)
         self.assertEqual(updated_user.username, self.form_data['username'])
-        # self.assertContains(request, 'Пользователь успешно изменен')
         self.assertContains(request,
                             _('The user has been successfully updated'))
 
     def test_user_update_no_permission(self):
         self.client.force_login(self.user3)
         updated_user = reverse('user_update', kwargs={"pk": 2})
-        get_response = self.client.get(updated_user, follow=True)
+        get_response = self.client.get(updated_user,
+                                       follow=True)
         self.assertRedirects(get_response, reverse('users_list'))
-        post_response = self.client.get(updated_user, self.form_data,
+        post_response = self.client.get(updated_user,
+                                        self.form_data,
                                         follow=True)
         user = User.objects.get(pk=2)
         self.assertRedirects(post_response, reverse('users_list'))
         self.assertFalse(user.username == self.form_data['username'])
-        # self.assertContains(post_response,
-        #                     'У вас недостаточно прав, '
-        #                     'чтобы редактировать другого пользователя')
         self.assertContains(post_response,
                             _("You don't have enough rights "
                               "to edit another user"))
@@ -108,26 +109,26 @@ class UserTestClass(TestCase):
     def test_user_delete_success(self):
         self.client.force_login(self.user1)
         deleted_user = reverse('user_delete', kwargs={"pk": 1})
-        get_response = self.client.get(deleted_user, follow=True)
+        get_response = self.client.get(deleted_user,
+                                       follow=True)
         self.assertEqual(get_response.status_code, 200)
         self.assertTemplateUsed(get_response, 'users/delete.html')
-        post_response = self.client.post(deleted_user, follow=True)
+        post_response = self.client.post(deleted_user,
+                                         follow=True)
         self.assertRedirects(post_response, reverse('users_list'))
-        # self.assertContains(post_response, 'Пользователь успешно удален')
         self.assertContains(post_response,
                             _('The user was successfully deleted'))
 
     def test_user_delete_no_permission(self):
         self.client.force_login(self.user3)
         deleted_user = reverse('user_delete', kwargs={"pk": 2})
-        get_response = self.client.get(deleted_user, follow=True)
+        get_response = self.client.get(deleted_user,
+                                       follow=True)
         self.assertEqual(get_response.status_code, 200)
         self.assertRedirects(get_response, reverse('users_list'))
         self.assertEqual(len(User.objects.all()), 3)
-        post_response = self.client.post(deleted_user, follow=True)
-        # self.assertContains(post_response,
-        #                     'У вас недостаточно прав, '
-        #                     'чтобы редактировать другого пользователя')
+        post_response = self.client.post(deleted_user,
+                                         follow=True)
         self.assertContains(post_response,
                             _("You don't have enough rights "
                               "to edit another user"))

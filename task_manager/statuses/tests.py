@@ -25,7 +25,8 @@ class StatusTestWithoutAuth(TestCase):
 
 
 class StatusTestClass(TestCase):
-    fixtures = ['users.json', 'statuses.json', 'tasks.json', 'labels.json']
+    fixtures = ['users.json', 'statuses.json',
+                'tasks.json', 'labels.json']
 
     def setUp(self):
         self.user = User.objects.get(pk=1)
@@ -64,7 +65,6 @@ class StatusTestClass(TestCase):
                                          follow=True)
         self.assertRedirects(post_response, self.statuses)
         self.assertTrue(Status.objects.get(id=11))
-        # self.assertContains(post_response, 'Статус успешно создан')
         self.assertContains(post_response,
                             _('The status was created successfully'))
 
@@ -84,8 +84,8 @@ class StatusTestClass(TestCase):
         self.assertRedirects(post_response, self.statuses)
         self.status = Status.objects.get(pk=8)
         self.assertEqual(self.status.name, self.form_data['name'])
-        # self.assertContains(post_response, 'Статус успешно изменен')
-        self.assertContains(post_response, _('The status updated successfully'))
+        self.assertContains(post_response,
+                            _('The status updated successfully'))
 
     def test_not_used_status_delete(self):
         self.status_delete = reverse('status_delete', kwargs={'pk': 9})
@@ -97,11 +97,11 @@ class StatusTestClass(TestCase):
         """
         POST
         """
-        post_response = self.client.post(self.status_delete, follow=True)
+        post_response = self.client.post(self.status_delete,
+                                         follow=True)
         self.assertRedirects(post_response, self.statuses)
         with self.assertRaises(ObjectDoesNotExist):
             Status.objects.get(pk=9)
-        # self.assertContains(post_response, 'Статус успешно удален')
         self.assertContains(post_response,
                             _('The status was successfully deleted'))
 

@@ -26,7 +26,8 @@ class TaskTestWithoutAuth(TestCase):
 
 
 class TaskTestClass(TestCase):
-    fixtures = ['users.json', 'statuses.json', 'tasks.json', 'labels.json']
+    fixtures = ['users.json', 'statuses.json',
+                'tasks.json', 'labels.json']
 
     def setUp(self):
         self.login = reverse('user_login')
@@ -104,10 +105,8 @@ class TaskTestClass(TestCase):
         new_task = Task.objects.get(name=self.form_data['name'])
         self.assertEqual(new_task.executor.id, self.user2.id)
         self.assertEqual(new_task.author.id, self.user1.id)
-        # self.assertContains(post_response, text='Задача успешно создана')
-        self.assertContains(
-            post_response,
-            text=_('The task was created successfully'))
+        self.assertContains(post_response,
+                            text=_('The task was created successfully'))
 
     def test_task_update(self):
         self.client.force_login(self.user3)
@@ -125,7 +124,6 @@ class TaskTestClass(TestCase):
                                          follow=True)
         self.assertRedirects(post_response, self.tasks)
         self.assertEqual(Task.objects.get(pk=2).executor, self.user2)
-        # self.assertContains(post_response, text='Задача успешно изменена')
         self.assertContains(
             post_response,
             text=_('The task updated successfully'))
@@ -140,11 +138,11 @@ class TaskTestClass(TestCase):
         """
         POST
         """
-        post_response = self.client.post(self.task_delete, follow=True)
+        post_response = self.client.post(self.task_delete,
+                                         follow=True)
         self.assertRedirects(post_response, self.tasks)
         with self.assertRaises(ObjectDoesNotExist):
             Task.objects.get(pk=7)
-        # self.assertContains(post_response, text='Задача успешно удалена')
         self.assertContains(
             post_response,
             text=_('The task was successfully deleted'))
@@ -159,7 +157,8 @@ class TaskTestClass(TestCase):
         """
         POST
         """
-        post_response = self.client.post(self.task_delete, follow=True)
+        post_response = self.client.post(self.task_delete,
+                                         follow=True)
         self.assertRedirects(post_response, self.tasks)
         self.assertEqual(len(Task.objects.all()), 3)
 

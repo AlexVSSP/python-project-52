@@ -1,11 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, \
+    UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import ProtectedError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, \
+    UpdateView, DeleteView
 from django.utils.translation import gettext as _
 
 from task_manager.users.models import User
@@ -28,9 +30,7 @@ class UserFormCreateView(SuccessMessageMixin, CreateView):
     form_class = UserForm
     template_name = 'users/create.html'
     success_url = reverse_lazy('user_login')
-    # success_message = 'Пользователь успешно зарегистрирован'
     success_message = _('The user has been successfully registered')
-    # extra_context = {'button_name': 'Зарегистрировать'}
     extra_context = {'button_name': _('Register')}
 
 
@@ -43,9 +43,7 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin,
     form_class = UserForm
     template_name = 'users/update.html'
     success_url = reverse_lazy('users_list')
-    # success_message = 'Пользователь успешно изменен'
     success_message = _('The user has been successfully updated')
-    # extra_context = {'button_name': 'Изменить'}
     extra_context = {'button_name': _('To change')}
     login_url = reverse_lazy('user_login')
 
@@ -56,13 +54,10 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin,
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
             url = reverse_lazy('users_list')
-            # message = 'У вас недостаточно прав, ' \
-            #           'чтобы редактировать другого пользователя'
             message = _("You don't have enough rights "
                         "to edit another user")
         else:
             url = self.login_url
-            # message = 'Вы не авторизованы! Пожалуйста, выполните вход'
             message = _('You are not logged in! Please log in')
         messages.warning(self.request, message)
         return redirect(url)
@@ -71,9 +66,10 @@ class UserUpdateView(LoginRequiredMixin, UserPassesTestMixin,
         form.save()
         username = self.request.POST['username']
         password = self.request.POST['password1']
-        user = authenticate(self.request, username=username, password=password)
+        user = authenticate(self.request,
+                            username=username,
+                            password=password)
         login(self.request, user)
-        # messages.success(self.request, 'Пользователь успешно изменен')
         messages.success(self.request,
                          _('The user has been successfully updated'))
         return redirect(self.success_url)
@@ -87,8 +83,6 @@ class UserDestroyView(LoginRequiredMixin, UserPassesTestMixin,
     model = User
     template_name = 'users/delete.html'
     success_url = reverse_lazy('users_list')
-    # success_message = 'Пользователь успешно удален'
-    # extra_context = {'button_name': 'Да, удалить'}
     extra_context = {'button_name': _('Yes, delete')}
     login_url = reverse_lazy('user_login')
 
@@ -99,13 +93,10 @@ class UserDestroyView(LoginRequiredMixin, UserPassesTestMixin,
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
             url = reverse_lazy('users_list')
-            # message = 'У вас недостаточно прав, ' \
-            #           'чтобы редактировать другого пользователя'
             message = _("You don't have enough rights "
                         "to edit another user")
         else:
             url = self.login_url
-            # message = 'Вы не авторизованы! Пожалуйста, выполните вход'
             message = _('You are not logged in! Please log in')
         messages.warning(self.request, message)
         return redirect(url)
@@ -113,13 +104,10 @@ class UserDestroyView(LoginRequiredMixin, UserPassesTestMixin,
     def form_valid(self, form):
         try:
             self.object.delete()
-            # messages.success(self.request, 'Пользователь успешно удален')
             messages.success(self.request,
                              _('The user was successfully deleted'))
             return redirect(self.success_url)
         except ProtectedError:
-            # messages.warning(self.request,
-            # 'Невозможно удалить пользователя, потому что он используется')
             messages.warning(
                 self.request,
                 _('Unable to delete the user because it is being used'))
